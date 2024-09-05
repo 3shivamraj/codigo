@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Materials</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Course Materials</h2>
+        <form id="uploadForm">
+            <label for="course">Course:</label>
+            <input type="text" id="course" name="course" required><br><br>
+            
+            <label for="file">File:</label>
+            <input type="file" id="file" name="file" required><br><br>
+            
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const course = document.getElementById('course').value;
+            const file = document.getElementById('file').files[0];
+
+            if (course && file) {
+                alert('File uploaded successfully!');
+                // Replace with actual file upload logic
+            }
+        });
+    </script>
+</body>
+</html>

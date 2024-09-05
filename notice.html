@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notices</title>
+    <link rel="stylesheet" href="styless.css" />
+    <style>
+      .notice-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .notice-item h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .notice-item p {
+        margin: 5px 0;
+      }
+
+      .notice-item .details {
+        display: none;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>Notices</h2>
+        <div id="noticesContainer">
+          <!-- Notices will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for notices (In a real application, this would come from a backend server)
+      const notices = [
+        {
+          title: "Library Closed for Maintenance",
+          date: "2024-09-01",
+          content:
+            "The library will be closed from September 1st to September 3rd for maintenance. Please plan accordingly.",
+        },
+        {
+          title: "Upcoming Exam Schedule",
+          date: "2024-09-02",
+          content:
+            "The schedule for the upcoming exams has been released. Please check the exam section for details.",
+        },
+        {
+          title: "New Course Materials Available",
+          date: "2024-09-03",
+          content:
+            "New course materials have been uploaded for the semester. Please check the materials section to download the latest files.",
+        },
+      ];
+
+      function displayNotices() {
+        const noticesContainer = document.getElementById("noticesContainer");
+        noticesContainer.innerHTML = "";
+
+        notices.forEach((notice) => {
+          const noticeDiv = document.createElement("div");
+          noticeDiv.classList.add("notice-item");
+          noticeDiv.innerHTML = `
+                    <h3>${notice.title}</h3>
+                    <p><strong>Date:</strong> ${notice.date}</p>
+                    <p>${notice.content.slice(0, 100)}...</p>
+                    <button onclick="toggleDetails(this)">Read More</button>
+                    <div class="details">${notice.content}</div>
+                `;
+          noticesContainer.appendChild(noticeDiv);
+        });
+      }
+
+      function toggleDetails(button) {
+        const details = button.nextElementSibling;
+        if (details.style.display === "block") {
+          details.style.display = "none";
+          button.textContent = "Read More";
+        } else {
+          details.style.display = "block";
+          button.textContent = "Read Less";
+        }
+      }
+
+      // Display notices on page load
+      displayNotices();
+    </script>
+  </body>
+</html>

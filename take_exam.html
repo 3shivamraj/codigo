@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Exam</title>
+    <link rel="stylesheet" href="styless.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h2>My LMS</h2>
+            <ul id="sidebarMenu">
+                <li id="menuTeacher" style="display: none;">
+                    <a href="upload_materials.html">Upload Materials</a>
+                    <a href="view_students.html">View Student Performance</a>
+                    <a href="manage_courses.html">Manage Courses</a>
+                    <a href="lecture.html">Lectures</a>
+                    <a href="forum.html">Forum</a>
+                    <a href="request.html">Requests</a>
+                    <a href="notice.html">Notices</a>
+                    <a href="watch_time.html">Watch Time</a>
+                </li>
+                <li id="menuStudent" style="display: none;">
+                    <a href="view_materials.html">View Materials</a>
+                    <a href="take_exam.html">Take Exam</a>
+                    <a href="view_grades.html">View Grades</a>
+                    <a href="lecture.html">Lectures</a>
+                    <a href="forum.html">Forum</a>
+                    <a href="request.html">Requests</a>
+                    <a href="notice.html">Notices</a>
+                    <a href="watch_time.html">Watch Time</a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <h2>Take Exam</h2>
+            <form id="examForm">
+                <div class="question">
+                    <h3>1. What is the capital of France?</h3>
+                    <label>
+                        <input type="radio" name="q1" value="a" required> a) Berlin
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q1" value="b"> b) Madrid
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q1" value="c"> c) Paris
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q1" value="d"> d) Rome
+                    </label>
+                </div>
+                
+                <div class="question">
+                    <h3>2. Which language is primarily used for web development?</h3>
+                    <label>
+                        <input type="radio" name="q2" value="a" required> a) Python
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q2" value="b"> b) Java
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q2" value="c"> c) JavaScript
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q2" value="d"> d) C++
+                    </label>
+                </div>
+                
+                <div class="question">
+                    <h3>3. What is the largest planet in our solar system?</h3>
+                    <label>
+                        <input type="radio" name="q3" value="a" required> a) Earth
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q3" value="b"> b) Mars
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q3" value="c"> c) Jupiter
+                    </label><br>
+                    <label>
+                        <input type="radio" name="q3" value="d"> d) Saturn
+                    </label>
+                </div>
+                
+                <button type="submit">Submit Exam</button>
+            </form>
+            <div id="result" style="display: none;">
+                <h3>Exam Results</h3>
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('examForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const correctAnswers = {
+                q1: 'c',
+                q2: 'c',
+                q3: 'c'
+            };
+
+            let score = 0;
+            const formData = new FormData(event.target);
+            formData.forEach((value, key) => {
+                if (correctAnswers[key] === value) {
+                    score++;
+                }
+            });
+
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const resultText = `You scored ${score} out of ${totalQuestions}.`;
+
+            document.getElementById('resultText').textContent = resultText;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

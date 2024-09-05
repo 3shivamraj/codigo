@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Materials</title>
+    <link rel="stylesheet" href="styless.css" />
+    <style>
+      .material-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .material-item h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .material-item p {
+        margin: 5px 0;
+      }
+
+      .material-item a {
+        color: #3498db;
+        text-decoration: none;
+      }
+
+      .material-item a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>View Materials</h2>
+        <div id="materialsContainer">
+          <!-- Materials will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for materials (In a real application, this would come from a backend server)
+      const materials = [
+        {
+          title: "Introduction to Programming - Lecture Notes",
+          type: "PDF",
+          link: "path/to/intro_programming.pdf",
+        },
+        {
+          title: "Advanced Algorithms - Video Lecture",
+          type: "Video",
+          link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        },
+        {
+          title: "JavaScript Basics - Interactive Tutorial",
+          type: "Interactive",
+          link: "path/to/js_basics.html",
+        },
+        {
+          title: "Machine Learning Overview - Slide Deck",
+          type: "PDF",
+          link: "path/to/ml_overview.pdf",
+        },
+      ];
+
+      function displayMaterials() {
+        const materialsContainer =
+          document.getElementById("materialsContainer");
+        materialsContainer.innerHTML = "";
+
+        materials.forEach((material) => {
+          const materialDiv = document.createElement("div");
+          materialDiv.classList.add("material-item");
+          materialDiv.innerHTML = `
+                    <h3>${material.title}</h3>
+                    <p><strong>Type:</strong> ${material.type}</p>
+                    <p><a href="${material.link}" target="_blank">View/Download ${material.type}</a></p>
+                `;
+          materialsContainer.appendChild(materialDiv);
+        });
+      }
+
+      // Display materials on page load
+      displayMaterials();
+    </script>
+  </body>
+</html>

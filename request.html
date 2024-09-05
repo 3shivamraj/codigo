@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Requests</title>
+    <link rel="stylesheet" href="styless.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>Requests</h2>
+        <form id="requestForm">
+          <label for="requestTitle">Request Title:</label>
+          <input
+            type="text"
+            id="requestTitle"
+            name="requestTitle"
+            required
+          /><br /><br />
+
+          <label for="requestDescription">Request Description:</label>
+          <textarea
+            id="requestDescription"
+            name="requestDescription"
+            rows="4"
+            required
+          ></textarea
+          ><br /><br />
+
+          <button type="submit">Submit Request</button>
+        </form>
+        <h3>Existing Requests</h3>
+        <div id="requestsList">
+          <!-- Existing requests will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for existing requests (In a real application, this would come from a backend server)
+      const existingRequests = [
+        { title: "Request 1", description: "Description for request 1" },
+        { title: "Request 2", description: "Description for request 2" },
+      ];
+
+      function displayRequests() {
+        const requestsList = document.getElementById("requestsList");
+        requestsList.innerHTML = "";
+
+        existingRequests.forEach((request) => {
+          const requestDiv = document.createElement("div");
+          requestDiv.classList.add("request");
+          requestDiv.innerHTML = `<h4>${request.title}</h4><p>${request.description}</p>`;
+          requestsList.appendChild(requestDiv);
+        });
+      }
+
+      document
+        .getElementById("requestForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const title = document.getElementById("requestTitle").value;
+          const description =
+            document.getElementById("requestDescription").value;
+
+          if (title && description) {
+            // Add new request to the list (In a real application, you would send this to a server)
+            existingRequests.push({ title, description });
+            displayRequests();
+
+            // Clear the form
+            document.getElementById("requestTitle").value = "";
+            document.getElementById("requestDescription").value = "";
+          }
+        });
+
+      // Display existing requests on page load
+      displayRequests();
+    </script>
+  </body>
+</html>

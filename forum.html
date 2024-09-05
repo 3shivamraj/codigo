@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forum</title>
+    <link rel="stylesheet" href="styless.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>Forum</h2>
+        <form id="postForm">
+          <label for="topicTitle">Topic Title:</label>
+          <input
+            type="text"
+            id="topicTitle"
+            name="topicTitle"
+            required
+          /><br /><br />
+
+          <label for="postContent">Post Content:</label>
+          <textarea
+            id="postContent"
+            name="postContent"
+            rows="4"
+            required
+          ></textarea
+          ><br /><br />
+
+          <button type="submit">Post</button>
+        </form>
+        <h3>Discussion Topics</h3>
+        <div id="forumTopics">
+          <!-- Existing topics will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for existing topics (In a real application, this would come from a backend server)
+      const existingTopics = [
+        { title: "Topic 1", content: "Content for topic 1" },
+        { title: "Topic 2", content: "Content for topic 2" },
+      ];
+
+      function displayTopics() {
+        const forumTopics = document.getElementById("forumTopics");
+        forumTopics.innerHTML = "";
+
+        existingTopics.forEach((topic) => {
+          const topicDiv = document.createElement("div");
+          topicDiv.classList.add("topic");
+          topicDiv.innerHTML = `
+                    <h4>${topic.title}</h4>
+                    <p>${topic.content}</p>
+                `;
+          forumTopics.appendChild(topicDiv);
+        });
+      }
+
+      document
+        .getElementById("postForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const title = document.getElementById("topicTitle").value;
+          const content = document.getElementById("postContent").value;
+
+          if (title && content) {
+            // Add new topic to the list (In a real application, you would send this to a server)
+            existingTopics.push({ title, content });
+            displayTopics();
+
+            // Clear the form
+            document.getElementById("topicTitle").value = "";
+            document.getElementById("postContent").value = "";
+          }
+        });
+
+      // Display existing topics on page load
+      displayTopics();
+    </script>
+  </body>
+</html>

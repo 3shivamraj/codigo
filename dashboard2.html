@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styless.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>Hi Shivam Raj</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <div class="header">
+          <h2>Welcome, <span id="usernameDisplay"></span></h2>
+          <p>Role: <span id="roleDisplay"></span></p>
+        </div>
+        <div class="card-container">
+          <div class="card" id="teacherDashboard" style="display: none">
+            <h3>Teacher Dashboard</h3>
+            <p>Manage your courses, materials, and track student progress.</p>
+          </div>
+          <div class="card" id="studentDashboard" style="display: none">
+            <h3>Student Dashboard</h3>
+            <p>
+              Access your course materials, take exams, and view your grades.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const role = localStorage.getItem("role");
+      const username = localStorage.getItem("username");
+
+      document.getElementById("roleDisplay").textContent =
+        role.charAt(0).toUpperCase() + role.slice(1);
+      document.getElementById("usernameDisplay").textContent = username;
+
+      if (role === "teacher") {
+        document.getElementById("teacherDashboard").style.display = "block";
+        document.getElementById("menuTeacher").style.display = "block";
+      } else if (role === "student") {
+        document.getElementById("studentDashboard").style.display = "block";
+        document.getElementById("menuStudent").style.display = "block";
+      }
+    </script>
+  </body>
+</html>

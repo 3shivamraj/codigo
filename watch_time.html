@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Watch Time</title>
+    <link rel="stylesheet" href="styless.css" />
+    <style>
+      .watchtime-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .watchtime-item h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+      }
+
+      .watchtime-item p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+          <li id="menuStudent" style="display: none">
+            <a href="view_materials.html">View Materials</a>
+            <a href="take_exam.html">Take Exam</a>
+            <a href="view_grades.html">View Grades</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h2>Watch Time</h2>
+        <div id="watchTimeContainer">
+          <!-- Watch time data will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data for watch time (In a real application, this would come from a backend server)
+      const watchTimeData = [
+        {
+          activity: "Lecture 1: Introduction to Programming",
+          timeSpent: "1 hour 30 minutes",
+        },
+        {
+          activity: "Lecture 2: Advanced Algorithms",
+          timeSpent: "2 hours 15 minutes",
+        },
+        {
+          activity: "Live Session: Q&A with Instructor",
+          timeSpent: "45 minutes",
+        },
+        {
+          activity: "Workshop: JavaScript Basics",
+          timeSpent: "1 hour 10 minutes",
+        },
+      ];
+
+      function displayWatchTime() {
+        const watchTimeContainer =
+          document.getElementById("watchTimeContainer");
+        watchTimeContainer.innerHTML = "";
+
+        watchTimeData.forEach((entry) => {
+          const entryDiv = document.createElement("div");
+          entryDiv.classList.add("watchtime-item");
+          entryDiv.innerHTML = `
+                    <h3>${entry.activity}</h3>
+                    <p><strong>Time Spent:</strong> ${entry.timeSpent}</p>
+                `;
+          watchTimeContainer.appendChild(entryDiv);
+        });
+      }
+
+      // Display watch time data on page load
+      displayWatchTime();
+    </script>
+  </body>
+</html>
