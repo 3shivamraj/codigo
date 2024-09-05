@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Materials</title>
+    <link rel="stylesheet" href="styless.css" />
+    <style>
+      .upload-container {
+        margin-top: 20px;
+        padding: 30px;
+        background-color: #ecf0f1;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .upload-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #34495e;
+      }
+
+      .upload-container label {
+        display: block;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .upload-container input,
+      .upload-container select,
+      .upload-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #bdc3c7;
+        border-radius: 5px;
+      }
+
+      .upload-container button {
+        width: 100%;
+        padding: 15px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .upload-container button:hover {
+        background-color: #2980b9;
+      }
+
+      .progress-bar {
+        height: 25px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar div {
+        height: 100%;
+        background-color: #3498db;
+        width: 0;
+        transition: width 0.3s;
+      }
+
+      .material-list {
+        margin-top: 30px;
+        padding: 30px;
+        background-color: #ecf0f1;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+        margin: 20px auto;
+      }
+
+      .material-list h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #34495e;
+      }
+
+      .material-list table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .material-list th,
+      .material-list td {
+        padding: 10px;
+        border: 1px solid #bdc3c7;
+        text-align: center;
+      }
+
+      .material-list td a {
+        color: #3498db;
+        text-decoration: none;
+      }
+
+      .material-list td a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="sidebar">
+        <h2>My LMS</h2>
+        <ul id="sidebarMenu">
+          <li id="menuTeacher" style="display: none">
+            <a href="upload_materials.html">Upload Materials</a>
+            <a href="view_students.html">View Student Performance</a>
+            <a href="manage_courses.html">Manage Courses</a>
+            <a href="lecture.html">Lectures</a>
+            <a href="forum.html">Forum</a>
+            <a href="request.html">Requests</a>
+            <a href="notice.html">Notices</a>
+            <a href="watch_time.html">Watch Time</a>
+            <a href="performance_check.html">Performance Check</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content">
+        <div class="upload-container">
+          <h2>Upload Learning Materials</h2>
+          <form id="uploadForm">
+            <label for="title">Material Title</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="course">Course</label>
+            <select id="course" name="course" required>
+              <option value="">Select Course</option>
+              <option value="math">Mathematics</option>
+              <option value="programming">Programming</option>
+              <option value="algorithms">Algorithms</option>
+            </select>
+
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              required
+            ></textarea>
+
+            <label for="file">Upload Material (PDF, Video, etc.)</label>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              accept=".pdf,.mp4,.pptx,.docx,.zip"
+              required
+            />
+
+            <div class="progress-bar" id="progressBar">
+              <div id="progress"></div>
+            </div>
+
+            <button type="submit">Upload</button>
+          </form>
+        </div>
+
+        <div class="material-list" id="materialList">
+          <h3>Uploaded Materials</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Course</th>
+                <th>Description</th>
+                <th>File</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="materialTableBody">
+              <!-- Material rows will be inserted here dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const course = document.getElementById("course").value;
+          const description = document.getElementById("description").value;
+          const file = document.getElementById("file").files[0];
+
+          if (title && course && description && file) {
+            // Simulate file upload with progress bar
+            const progressBar = document.getElementById("progress");
+            let progress = 0;
+
+            const interval = setInterval(() => {
+              progress += 10;
+              progressBar.style.width = progress + "%";
+              if (progress >= 100) {
+                clearInterval(interval);
+                alert("Material uploaded successfully!");
+
+                // Add material to the table (simulating a successful upload)
+                const tableBody = document.getElementById("materialTableBody");
+                const newRow = `
+                            <tr>
+                                <td>${title}</td>
+                                <td>${course}</td>
+                                <td>${description}</td>
+                                <td><a href="#" download="${file.name}">Download</a></td>
+                                <td><a href="#" class="delete-link">Delete</a></td>
+                            </tr>
+                        `;
+                tableBody.insertAdjacentHTML("beforeend", newRow);
+                progressBar.style.width = "0%";
+
+                // Clear form inputs
+                document.getElementById("uploadForm").reset();
+              }
+            }, 200);
+          } else {
+            alert("Please fill in all fields and upload a valid file.");
+          }
+        });
+
+      // Handle delete action (Simulated)
+      document.addEventListener("click", function (event) {
+        if (event.target.classList.contains("delete-link")) {
+          event.preventDefault();
+          const row = event.target.closest("tr");
+          row.remove();
+          alert("Material deleted successfully!");
+        }
+      });
+    </script>
+  </body>
+</html>
